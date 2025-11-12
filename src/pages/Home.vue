@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { useShoppingListsCounter } from '@/stores/shoppingLists'
 import ShoppingListCard from '@/components/ShoppingListCard.vue'
-
 const store = useShoppingListsCounter()
 </script>
 
 <template>
-  <div class="bg-gray-100 min-h-screen">
-    <!-- Empty State -->
+  <div class="bg-gray-100 min-h-[calc(100vh-4rem)]">
     <div
       v-if="store.shoppingLists.length === 0"
-      class="flex flex-col items-center justify-center text-center text-gray-500 min-h-screen"
+      class="flex flex-col items-center justify-center text-center text-gray-500 min-h-[calc(100vh-4rem)]"
     >
       <p class="mb-6">No shopping lists yet. Add one to get started.</p>
       <button
