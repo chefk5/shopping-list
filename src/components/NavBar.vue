@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { useFetch } from '@/composables/useFetch';
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
+
+const { data, error } = useFetch('...')
 </script>
 
 <template>

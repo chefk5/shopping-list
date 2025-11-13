@@ -5,7 +5,7 @@ const store = useShoppingListsCounter()
 </script>
 
 <template>
-  <div class="bg-gray-100 min-h-[calc(100vh-4rem)]">
+  <div class="bg-background min-h-[calc(100vh-4rem)]">
     <div
       v-if="store.shoppingLists.length === 0"
       class="flex flex-col items-center justify-center text-center text-gray-500 min-h-[calc(100vh-4rem)]"
@@ -13,7 +13,7 @@ const store = useShoppingListsCounter()
       <p class="mb-6">No shopping lists yet. Add one to get started.</p>
       <button
         @click="store.addShoppingList('test')"
-        class="flex items-center justify-center py-2 px-4 bg-blue-500 text-white rounded-md"
+        class="flex items-center justify-center py-2 px-4 bg-success text-white rounded-md"
       >
         Add list
       </button>
@@ -31,7 +31,7 @@ const store = useShoppingListsCounter()
       <div class="flex justify-center mt-8">
         <button
           @click="store.addShoppingList('test')"
-          class="flex items-center justify-center py-2 px-4 bg-blue-500 text-white rounded-md"
+          class="flex items-center justify-center py-2 px-4 bg-success text-white rounded-md"
         >
           Add list
         </button>

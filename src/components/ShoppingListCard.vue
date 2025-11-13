@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import AddIcon from '@/assets/Icons/AddIcon.vue'
 import { useShoppingListsCounter } from '@/stores/shoppingLists'
 import type { ShoppingListItem } from '@/types'
 import { ref } from 'vue'
+import Button from './common/Button.vue'
 
 const store = useShoppingListsCounter()
 const itemText = ref('')
@@ -37,27 +39,16 @@ const onAddItem = () => {
         autocomplete="off"
       />
 
-      <button
+      <Button
+        variant="primary"
         type="submit"
-        class="inline-flex items-center gap-2 h-10 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md shadow-sm"
-        aria-label="Add item"
+        aria-label="Add Item"
+        :on-click="() => store.editItemInShoppingList(props.shoppingListId, item.id, item.itemName)"
+        btn-text="Add Item"
+        styles="inline-flex items-center gap-2 h-10"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-4 w-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 4v16m8-8H4"
-          />
-        </svg>
-        Add
-      </button>
+        <AddIcon />
+      </Button>
     </form>
 
     <section>
@@ -79,44 +70,35 @@ const onAddItem = () => {
                 class="flex-1 border border-gray-200 rounded-md px-2 py-1 focus:outline-none"
                 v-model="item.itemName"
               />
-              <button
-                type="button"
-                @click="store.editItemInShoppingList(props.shoppingListId, item.id, item.itemName)"
-                class="text-sm bg-green-100 px-3 p-3"
-              >
-                Save
-              </button>
+
+              <Button
+                variant="success"
+                :on-click="
+                  () => store.editItemInShoppingList(props.shoppingListId, item.id, item.itemName)
+                "
+                btn-text="Save"
+              />
             </div>
           </div>
 
           <div class="flex items-center gap-3">
-            <button
+            <Button
               v-if="!item.isEditing"
-              type="button"
-              :aria-label="`Edit item: ${item.itemName}`"
-              class="text-sm text-yellow-700 bg-yellow-100 p-3 hover:bg-yellow-200"
-              @click="store.setIsEditing(props.shoppingListId, item.id, true)"
-            >
-              Edit
-            </button>
-            <button
+              variant="warning"
+              :on-click="() => store.setIsEditing(props.shoppingListId, item.id, true)"
+              btn-text="Edit"
+            />
+            <Button
               v-else
-              type="button"
-              aria-label="Cancel editing"
-              class="text-sm text-gray-700 bg-gray-100 p-3 hover:bg-gray-200"
-              @click="store.setIsEditing(props.shoppingListId, item.id, false)"
-            >
-              Cancel
-            </button>
-
-            <button
-              type="button"
-              class="text-sm text-red-700 bg-red-100 p-3 hover:bg-red-200"
-              @click="store.deleteItemInShoppingList(props.shoppingListId, item.id)"
-              aria-label="Delete item"
-            >
-              Delete
-            </button>
+              variant="warning"
+              :on-click="() => store.setIsEditing(props.shoppingListId, item.id, false)"
+              btn-text="Cancel"
+            />
+            <Button
+              variant="danger"
+              :on-click="() => store.deleteItemInShoppingList(props.shoppingListId, item.id)"
+              btn-text="Delete"
+            />
           </div>
         </li>
       </ul>
